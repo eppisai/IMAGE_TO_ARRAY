@@ -1,7 +1,19 @@
 <h1 align="center">Image to Array Conversion(2 bit, 4 colors)</h1> <br>
 <p>Python script to convert image to byte array, of color depth = 4, and bit depth = 2</p>
 
-<h2 align="center">Installing Dependencies and Running the platform</h2>
+<h2 align="center">Some examples to run the script</h2>
+
+## To convert perticular image :
+
+`python script.py -i checkboxfalse_icon.svg -ih 34 -iw 34`
+
+The above command converts the image named checkboxfalse_icon.svg to c header of bit depth 2,and dimensions of 34x34 (iw and ih have default value of 24, and are not required)
+
+## To convert all the images:
+
+`python script.py -i all`
+
+The above command converts all the images (ending with _icon.svg) to c header of bit depth 2,and dimensions of 24x24
  <br>
  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
