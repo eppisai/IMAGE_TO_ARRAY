@@ -8,7 +8,7 @@ import argparse                              #Used for taking input from command
 import glob                                  #Used for locating all the images, needed to to processed
 
 #converts rgba value to its corresponding rgb value 
-def rgba_to_4bit(image):
+def rgba_to_2bit(image):
     white_image = Image.new('RGBA', image.size, (255, 255, 255))
     image = Image.alpha_composite(white_image, image)
     image = image.convert('L')
@@ -17,7 +17,7 @@ def rgba_to_4bit(image):
         
 #converts image to byte array
 def image_to_array(im):
-    im = rgba_to_4bit(im)
+    im = rgba_to_2bit(im)
     array = []
     im = np.array(im)
     im = im.reshape(im.size//4,4)
