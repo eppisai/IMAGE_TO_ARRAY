@@ -27,24 +27,15 @@ def image_to_array(im):
         array.append(bits.sum())
     return array
 
-
-def main():
-    
-    argParse = argparse.ArgumentParser(prog = 'IMAGE_TO_ARRAY', description='Convert Image Files to C header Files')
-    argParse.add_argument("-i", "--input", required = True, help="Path of Input Image.", type=str)
-    argParse.add_argument("-iw", "--width",default = 24, required = False, help = "Width of output image", type = int)
-    argParse.add_argument("-ih", "--height",default = 24,required = False, help="Height of output image", type = int)
-    argsParsed = argParse.parse_args()
-    
-    
+#handles input files, and starts conversion to array 
+def handle_input_argument(argsParsed):
     files = ''
     if argsParsed.input == 'all':
       files = glob.glob('*_icon.svg')
     else:
       files = argsParsed.input
-      
+    
     for image in files:
-        
         #context closes automatically(scoped), it does not require f.close()
         with BytesIO() as f:
             svg2png(url = image, write_to = f)
@@ -70,6 +61,16 @@ def main():
              header_file = open(file_name + '_2BIT.h', 'w')
              header_file.write(file_content)
              header_file.close()
+    
+def main():
+    
+    argParse = argparse.ArgumentParser(prog = 'IMAGE_TO_ARRAY', description='Convert Image Files to C header Files')
+    argParse.add_argument("-i", "--input", required = True, help="Path of Input Image.", type=str)
+    argParse.add_argument("-iw", "--width",default = 24, required = False, help = "Width of output image", type = int)
+    argParse.add_argument("-ih", "--height",default = 24,required = False, help="Height of output image", type = int)
+    argsParsed = argParse.parse_args()
+    
+    handle_input_argument(argsParsed)
         
 if __name__ == '__main__':
     main()
