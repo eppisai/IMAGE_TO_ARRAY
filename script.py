@@ -27,24 +27,27 @@ def image_to_array(im):
         array.append(bits.sum())
     return array
 
-#handles input files, and starts conversion to array 
+#processes image to 2 bit image array.
+def process_image(image, filestream, argsParsed):
+    svg2png(url = image, write_to = filestream)
+    filestream.seek(0)
+    im = Image.open(filestream)
+    im = im.resize((argsParsed.width, argsParsed.height))
+    uint_array = image_to_array(im)
+    hexadecimal_array = ', '.join(hex(num) for num in uint_array)
+    return hexadecimal_array
+
+#handles input files, and starts conversion to array.
 def handle_input_argument(argsParsed):
     files = ''
     if argsParsed.input == 'all':
       files = glob.glob('*_icon.svg')
     else:
       files = argsParsed.input
-    
     for image in files:
         #context closes automatically(scoped), it does not require f.close()
         with BytesIO() as f:
-            svg2png(url = image, write_to = f)
-            f.seek(0)
-            im = Image.open(f)
-            im = im.resize((argsParsed.width, argsParsed.height))
-            
-            uint_array = image_to_array(im)
-            hexadecimal_array = ', '.join(hex(num) for num in uint_array)
+            hexadecimal_array = process_image(image, f, argsParsed)
             icon_name = image[slice(0,-4)]
             file_name = icon_name.upper()
             content = {
