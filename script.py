@@ -37,6 +37,25 @@ def process_image(image, filestream, argsParsed):
     hexadecimal_array = ', '.join(hex(num) for num in uint_array)
     return hexadecimal_array
 
+#processes Hexa-decimal array in C header file,which other arguments in C header
+def array_to_headerfile(image, hexadecimal_array, argsParsed):
+    icon_name = image[slice(0,-4)]
+    file_name = icon_name.upper()
+    content = {
+        'ICON_TEMPLATE_H' : file_name + '_H',
+        'ICON_NAME' : icon_name,
+        'WIDTH' : argsParsed.width,
+        'HEIGHT' : argsParsed.height,
+        'IMAGE_DATA' : hexadecimal_array 
+    }
+    with open('icon_template.h', 'r') as template_content:
+        h_template = Template(template_content.read())
+        file_content = h_template.substitute(content)
+        print(file_content)
+        header_file = open(file_name + '_2BIT.h', 'w')
+        header_file.write(file_content)
+        header_file.close()
+
 #handles input files, and starts conversion to array.
 def handle_input_argument(argsParsed):
     files = ''
@@ -48,22 +67,7 @@ def handle_input_argument(argsParsed):
         #context closes automatically(scoped), it does not require f.close()
         with BytesIO() as f:
             hexadecimal_array = process_image(image, f, argsParsed)
-            icon_name = image[slice(0,-4)]
-            file_name = icon_name.upper()
-            content = {
-                'ICON_TEMPLATE_H' : file_name + '_H',
-                'ICON_NAME' : icon_name,
-                'WIDTH' : argsParsed.width,
-                'HEIGHT' : argsParsed.height,
-                'IMAGE_DATA' : hexadecimal_array 
-            }
-            with open('icon_template.h', 'r') as template_content:
-             h_template = Template(template_content.read())
-             file_content = h_template.substitute(content)
-             print(file_content)
-             header_file = open(file_name + '_2BIT.h', 'w')
-             header_file.write(file_content)
-             header_file.close()
+            array_to_headerfile(image, hexadecimal_array, argsParsed)
     
 def main():
     argParse = argparse.ArgumentParser(prog = 'IMAGE_TO_ARRAY', description = 'Convert Image Files to C header Files')
