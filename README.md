@@ -1,5 +1,5 @@
 <h1 align="center">SVG Image to Array Conversion(2 bit, 4 colors)</h1> <br>
-<p>Python script to convert image to byte array, of color depth = 4, and bit depth = 2</p>
+<p>Python script to convert svg image to byte array, of color depth = 4, and bit depth = 2</p>
 
 <h2 align="center">Some examples to run the script</h2>
 
