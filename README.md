@@ -1,9 +1,9 @@
-<h1 align="center">Image to Array Conversion(2 bit, 4 colors)</h1> <br>
+<h1 align="center">SVG Image to Array Conversion(2 bit, 4 colors)</h1> <br>
 <p>Python script to convert image to byte array, of color depth = 4, and bit depth = 2</p>
 
 <h2 align="center">Some examples to run the script</h2>
 
-## To convert particular image :
+## To convert particular Svg image :
 
 `python script.py -i checkboxfalse_icon.svg -ih 34 -iw 34`
 
@@ -22,7 +22,7 @@ const Icon2bit checkboxfalse_icon = {24, 24, ImageDataFormat::Indexed2Bit, {RGB5
 #endif // CHECKBOXFALSE_ICON_H
 ```
 
-## To convert all the images:
+## To convert all the Svg images:
 
 `python script.py -i all`
 
