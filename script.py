@@ -37,7 +37,7 @@ def process_image(image, filestream, argsParsed):
     hexadecimal_array = ', '.join(hex(num) for num in uint_array)
     return hexadecimal_array
 
-#processes Hexa-decimal array in C header file,which other arguments in C header
+#processes Hexa-decimal array in C header file,with other arguments, required in C header
 def array_to_headerfile(image, hexadecimal_array, argsParsed):
     icon_name = image[slice(0,-4)]
     file_name = icon_name.upper()
