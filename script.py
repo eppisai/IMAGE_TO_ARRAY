@@ -70,7 +70,7 @@ def handle_input_argument(argsParsed):
             array_to_headerfile(image, hexadecimal_array, argsParsed)
     
 def main():
-    argParse = argparse.ArgumentParser(prog = 'IMAGE_TO_ARRAY', description = 'Convert Image Files to C header Files')
+    argParse = argparse.ArgumentParser(prog = 'IMAGE_TO_ARRAY', description = 'Convert SVG Image Files to C header Files')
     argParse.add_argument("-i", "--input", required = True, help = "Path of Input Image.", type = str)
     argParse.add_argument("-iw", "--width", default = 24, required = False, help = "Width of output image", type = int)
     argParse.add_argument("-ih", "--height", default = 24, required = False, help = "Height of output image", type = int)
