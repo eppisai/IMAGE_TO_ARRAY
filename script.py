@@ -27,7 +27,7 @@ def image_to_array(im):
         array.append(bits.sum())
     return array
 
-#processes image to 2 bit image array.
+#converts image to 2 bit image array.
 def process_image(image, filestream, argsParsed):
     svg2png(url = image, write_to = filestream)
     filestream.seek(0)
